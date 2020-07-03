@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "183819366942",
+    "firebase_url": "https://weather-apl-vlad.firebaseio.com",
+    "project_id": "weather-apl-vlad",
+    "storage_bucket": "weather-apl-vlad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183819366942:android:2f38fe124d26497f8a740f",
+        "android_client_info": {
+          "package_name": "com.example.apl_weather_vlad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "183819366942-6ofdlql8642dn09kp1oipomejqpo2h8g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9tUdTIp-N06OPvt0Rhbj0PZtEXh96v8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "183819366942-6ofdlql8642dn09kp1oipomejqpo2h8g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
