@@ -1,64 +1,47 @@
+import 'package:apl_weather_vlad/components/today-weather.dart';
+import 'package:apl_weather_vlad/components/weather-list.dart';
 import 'package:apl_weather_vlad/domain/weather.dart';
+import 'package:apl_weather_vlad/screens/splash.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int sectionIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
-        appBar: AppBar(
-          title: Text('Weather'),
-          leading: Icon(Icons.fitness_center),
-        ),
-        body: WorkoutsList(),
-      ),
+          backgroundColor: Theme.of(context).primaryColor,
+          appBar: AppBar(
+            title: Text('Weather'),
+            leading: Icon(Icons.fitness_center),
+          ),
+          body: //WeathersList(),
+              sectionIndex == 0 ? WeathersList() : TodayWeather(),
+          bottomNavigationBar: CurvedNavigationBar(
+            items: const <Widget>[
+              Icon(Icons.fitness_center),
+              Icon(Icons.search)
+            ],
+            index: 0,
+            height: 50,
+            color: Colors.white.withOpacity(0.5),
+            buttonBackgroundColor: Colors.white,
+            backgroundColor: Colors.white.withOpacity(0.5),
+            animationCurve: Curves.easeInOut,
+            animationDuration: Duration(milliseconds: 500),
+            onTap: (int index) {
+              setState(() => sectionIndex = index);
+            },
+          )),
     );
   }
-}
-
-Widget subtitle(BuildContext context, Weather workout) {
-  var color = Colors.grey;
-  double indicatorLevel = 0;
-
-  switch (workout.level) {
-    case 'Beginner':
-      color = Colors.green;
-      indicatorLevel = 0.23;
-      break;
-    case 'Intermediate':
-      color = Colors.yellow;
-      indicatorLevel = 0.66;
-      break;
-    case 'Advanced':
-      color = Colors.red;
-      indicatorLevel = 1;
-      break;
-  }
-  return Row(
-    children: <Widget>[
-      Expanded(
-        flex: 1,
-        child: LinearProgressIndicator(
-          backgroundColor: Theme.of(context).textTheme.title.color,
-          value: indicatorLevel,
-          valueColor: AlwaysStoppedAnimation(color),
-        ),
-      ),
-      SizedBox(
-        width: 10,
-      ),
-      Expanded(
-        flex: 3,
-        child: Text(
-          workout.level,
-          style: TextStyle(
-            color: Theme.of(context).textTheme.title.color,
-          ),
-        ),
-      ),
-    ],
-  );
 }

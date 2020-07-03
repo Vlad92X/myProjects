@@ -14,17 +14,20 @@ class Splash extends StatefulWidget {
   // Widget build(BuildContext context) {
   //   return Image.asset('assets/images/board-image.jpg');
   // }
+
+  bool get isLoadingSplash => _SplashState().isSplash;
 }
 
 class _SplashState extends State<Splash> {
-  bool _loading;
+  bool _loading = true;
   int _timerEnd;
+
+  bool get isSplash => _loading;
 
   @override
   void initState() {
     _loading = true;
     _timerEnd = 3;
-    // TODO: implement initState
     super.initState();
     _updateProgress();
   }
