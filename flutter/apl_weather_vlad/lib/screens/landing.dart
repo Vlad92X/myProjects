@@ -3,7 +3,6 @@ import 'package:apl_weather_vlad/screens/auth.dart';
 import 'package:apl_weather_vlad/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:apl_weather_vlad/screens/splash.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({Key key}) : super(key: key);

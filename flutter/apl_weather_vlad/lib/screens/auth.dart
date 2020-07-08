@@ -1,5 +1,5 @@
 import 'package:apl_weather_vlad/domain/user.dart';
-import 'package:apl_weather_vlad/screens/splash.dart';
+
 import 'package:apl_weather_vlad/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
