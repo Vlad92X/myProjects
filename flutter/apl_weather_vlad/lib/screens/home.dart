@@ -1,8 +1,6 @@
-import 'package:apl_weather_vlad/components/today-weather.dart';
-import 'package:apl_weather_vlad/components/list-weather.dart';
-import 'package:apl_weather_vlad/core/constants.dart';
-import 'package:apl_weather_vlad/domain/weather.dart';
-
+import 'package:apl_weather_vlad/screens/usersettings.dart';
+import 'package:apl_weather_vlad/screens/weather-clock.dart';
+import 'package:apl_weather_vlad/screens/weather-day.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,66 +15,54 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        backgroundColor: ColorTool().bgColorPrimary,
-        appBar: AppBar(
-          title: Text('Weather - ' + "City"),
-          leading: Icon(Icons.keyboard_arrow_down),
-        ),
-        body: TodayWeather(),
-        floatingActionButton: FloatingActionButton(
-            backgroundColor: ColorTool().bgColorActive2,
-            child: Icon(Icons.refresh),
-            onPressed: () => loadDataWeather(URLcomponents(city: 'Kharkiv'))),
+    // var navigationBar = CurvedNavigationBar(
+    //   items: const <Widget>[
+    //     Icon(Icons.fitness_center),
+    //     Icon(Icons.search),
+    //   ],
+    //   index: 0,
+    //   height: 47,
+    //   color: Colors.white.withOpacity(0.5),
+    //   buttonBackgroundColor: Colors.white,
+    //   backgroundColor: Colors.white.withOpacity(0.35),
+    //   animationCurve: Curves.easeInOut,
+    //   animationDuration: Duration(milliseconds: 500),
+    //   onTap: (int index) {
+    //     setState(() {
+    //       sectionIndex = index;
+    //     });
+    //   },
+    // );
+
+    return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
+      appBar: AppBar(
+        title: Text(
+            'MaxFit // ${sectionIndex == 0 ? 'Active Workouts' : 'Find Workouts'}'),
+        leading: Icon(Icons.keyboard_arrow_down),
+        actions: <Widget>[
+          FlatButton.icon(
+              onPressed: () {
+                //переход в настройки пользователя
+                UserSettings().settings();
+              },
+              icon: Icon(
+                Icons.supervised_user_circle,
+                color: Colors.white,
+              ),
+              label: SizedBox.shrink())
+        ],
       ),
+      body: sectionIndex == 0 ? WeatherByTheDays() : WeatherByTheClock(),
+      // bottomNavigationBar: navigationBar,
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(Icons.add),
+      //   backgroundColor: Colors.white,
+      //   foregroundColor: Theme.of(context).primaryColor,
+      //   onPressed: (){
+      //     Navigator.push(context, MaterialPageRoute(builder: (ctx) => AddWorkout()));
+      //   },
+      // ),
     );
   }
 }
-
-//  @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: Scaffold(
-//         backgroundColor: Theme.of(context).primaryColor,
-//         appBar: AppBar(
-//           title: Text('Weather'),
-//           leading: Icon(Icons.fitness_center),
-//         ),
-//         body: //WeathersList(),
-//             sectionIndex == 0 ? WeathersList() : TodayWeather(),
-//         bottomNavigationBar: CurvedNavigationBar(
-//           items: const <Widget>[Icon(Icons.fitness_center), Icon(Icons.search)],
-//           index: 0,
-//           height: 50,
-//           color: Colors.white.withOpacity(0.5),
-//           buttonBackgroundColor: Colors.white,
-//           backgroundColor: Colors.white.withOpacity(0.5),
-//           animationCurve: Curves.easeInOut,
-//           animationDuration: Duration(milliseconds: 500),
-//           onTap: (int index) {
-//             setState(() => sectionIndex = index);
-//           },
-//         ),
-//         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-//       ),
-//     );
-//   }
-// }
-
-// bottomNavigationBar: CurvedNavigationBar(
-//   items: const <Widget>[
-//     Icon(Icons.fitness_center),
-//     Icon(Icons.search)
-//   ],
-//   index: 0,
-//   height: 50,
-//   color: Colors.white.withOpacity(0.5),
-//   buttonBackgroundColor: Colors.white,
-//   backgroundColor: Colors.white.withOpacity(0.5),
-//   animationCurve: Curves.easeInOut,
-//   animationDuration: Duration(milliseconds: 500),
-//   onTap: (int index) {
-//     setState(() => sectionIndex = index);
-//   },
-// )

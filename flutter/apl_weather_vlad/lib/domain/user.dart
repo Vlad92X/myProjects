@@ -2,7 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class User {
   String id;
-  User.fromFirebase(FirebaseUser user) {
-    id = user.uid;
+  String language;
+  String locate = 'Kharkiv';
+
+  User.fromFirebase(FirebaseUser fUser) {
+    id = fUser.uid;
   }
 }

@@ -1,8 +1,7 @@
-import 'package:apl_weather_vlad/domain/listoffermodel.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class Weather {
+class Weather3h {
   String dt; //": 1594209600,
   MainDataWeather mainData;
   /*"main": { "temp": 296.92,
@@ -11,17 +10,23 @@ class Weather {
                                             "temp_max": 296.92,
                                             "pressure": 1006, }*/
   int id; //": 500,
-  String mainText; //"main": "Rain",
+  String mainWeather; //"main": "Rain",
   String description; //": "light rain",
   int clouds; //": {"all": 69  },
   Wind wind; //  "wind": {speed, degree}
   double rain = 0; //": {"3h": 2.56 },
   String dtTxt; //": "2020-07-08 12:00:00"
 
-  Weather({
-    this.dt,
-    this.mainData,
-  });
+  Weather3h(
+      {this.dt,
+      this.mainData,
+      this.id,
+      this.mainWeather,
+      this.description,
+      this.clouds,
+      this.wind,
+      this.rain,
+      this.dtTxt});
 }
 
 class MainDataWeather {
@@ -58,7 +63,7 @@ loadDataWeather(URLcomponents data) async {
     // print(response.body);
     var allData =
         (json.decode(response.body) as Map)['main'] as Map<String, dynamic>;
-    var weaterDataList = List<Weather>();
+    var weatherDataList = List<Weather3h>();
     allData.forEach((key, value) {});
   }
 }
