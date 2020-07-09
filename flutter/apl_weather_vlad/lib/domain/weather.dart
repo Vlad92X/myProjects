@@ -1,25 +1,60 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class Weather3h {
+class Weather {
   String dt; //": 1594209600,
-  MainDataWeather mainData;
+  MainDataWeather mainDataTemp;
   /*"main": { "temp": 296.92,
                                             "feels_like": 296.12,
                                             "temp_min": 294.58,
                                             "temp_max": 296.92,
                                             "pressure": 1006, }*/
-  int id; //": 500,
+  String id; //": 500,
   String mainWeather; //"main": "Rain",
   String description; //": "light rain",
   int clouds; //": {"all": 69  },
   Wind wind; //  "wind": {speed, degree}
   double rain = 0; //": {"3h": 2.56 },
-  String dtTxt; //": "2020-07-08 12:00:00"
+  DateTime dtTxt; //": "2020-07-08 12:00:00"
+  String get printDay {
+    String weekDay;
+    switch (dtTxt.weekday) {
+      case 1:
+        weekDay = '  Mo ';
+        break;
+      case 2:
+        weekDay = '  Tu ';
+        break;
+      case 3:
+        weekDay = '  We ';
+        break;
+      case 4:
+        weekDay = '  Th ';
+        break;
+      case 5:
+        weekDay = '  Fr ';
+        break;
+      case 6:
+        weekDay = '  Sa ';
+        break;
+      case 7:
+        weekDay = '  Su ';
+        break;
+    }
 
-  Weather3h(
+    return weekDay;
+  }
+
+  String get printTime =>
+      (dtTxt.hour < 10 ? '0' + dtTxt.hour.toString() : dtTxt.hour.toString()) +
+      ':' +
+      (dtTxt.minute < 10
+          ? '0' + dtTxt.minute.toString()
+          : dtTxt.minute.toString());
+
+  Weather(
       {this.dt,
-      this.mainData,
+      this.mainDataTemp,
       this.id,
       this.mainWeather,
       this.description,
@@ -63,51 +98,7 @@ loadDataWeather(URLcomponents data) async {
     // print(response.body);
     var allData =
         (json.decode(response.body) as Map)['main'] as Map<String, dynamic>;
-    var weatherDataList = List<Weather3h>();
+    var weatherDataList = List<Weather>();
     allData.forEach((key, value) {});
   }
 }
-
-/*
-    "cod": "200",
-    "message": 0,
-    "cnt": 40,
-    "list": [
-        {
-            "dt": 1594209600,
-            "main": {
-                "temp": 296.92,
-                "feels_like": 296.12,
-                "temp_min": 294.58,
-                "temp_max": 296.92,
-                "pressure": 1006,
-                "sea_level": 1007,
-                "grnd_level": 989,
-                "humidity": 68,
-                "temp_kf": 2.34
-            },
-            "weather": [
-                {
-                    "id": 500,
-                    "main": "Rain",
-                    "description": "light rain",
-                    "icon": "10d"
-                }
-            ],
-            "clouds": {
-                "all": 69
-            },
-            "wind": {
-                "speed": 4.83,
-                "deg": 328
-            },
-            "rain": {
-                "3h": 2.56
-            },
-            "sys": {
-                "pod": "d"
-            },
-            "dt_txt": "2020-07-08 12:00:00"
-        },
-        
-        */

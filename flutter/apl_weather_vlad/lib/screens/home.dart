@@ -1,6 +1,9 @@
+import 'package:apl_weather_vlad/core/constants.dart';
+
 import 'package:apl_weather_vlad/screens/usersettings.dart';
 import 'package:apl_weather_vlad/screens/weather-clock.dart';
 import 'package:apl_weather_vlad/screens/weather-day.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,34 +15,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int sectionIndex = 0;
+  var navigateHeight = 0.0;
+  var filterText = '';
 
   @override
   Widget build(BuildContext context) {
-    // var navigationBar = CurvedNavigationBar(
-    //   items: const <Widget>[
-    //     Icon(Icons.fitness_center),
-    //     Icon(Icons.search),
-    //   ],
-    //   index: 0,
-    //   height: 47,
-    //   color: Colors.white.withOpacity(0.5),
-    //   buttonBackgroundColor: Colors.white,
-    //   backgroundColor: Colors.white.withOpacity(0.35),
-    //   animationCurve: Curves.easeInOut,
-    //   animationDuration: Duration(milliseconds: 500),
-    //   onTap: (int index) {
-    //     setState(() {
-    //       sectionIndex = index;
-    //     });
-    //   },
-    // );
+    setState(() {
+      if (sectionIndex == 0) {
+        sectionIndex = 1;
+      } else {
+        sectionIndex = 0;
+      }
+    });
 
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: ColorTool().bgColorBackground,
       appBar: AppBar(
-        title: Text(
-            'MaxFit // ${sectionIndex == 0 ? 'Active Workouts' : 'Find Workouts'}'),
-        leading: Icon(Icons.keyboard_arrow_down),
         actions: <Widget>[
           FlatButton.icon(
               onPressed: () {
@@ -52,17 +43,38 @@ class _HomePageState extends State<HomePage> {
               ),
               label: SizedBox.shrink())
         ],
+        title: Center(
+          child: Text('Kharkiv',
+              style: TextStyle(
+                fontSize: 22,
+              )),
+        ),
+        leading: RaisedButton(
+          color: ColorTool().bgColorPrimary,
+          child: Row(
+            children: <Widget>[
+              (sectionIndex == 0
+                  ? Icon(
+                      Icons.timer,
+                      color: Colors.white,
+                    )
+                  : Icon(
+                      Icons.calendar_today,
+                      color: Colors.white,
+                    )),
+              Text(
+                filterText,
+                style: TextStyle(),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+          onPressed: () {
+            setState(() {});
+          },
+        ),
       ),
       body: sectionIndex == 0 ? WeatherByTheDays() : WeatherByTheClock(),
-      // bottomNavigationBar: navigationBar,
-      // floatingActionButton: FloatingActionButton(
-      //   child: Icon(Icons.add),
-      //   backgroundColor: Colors.white,
-      //   foregroundColor: Theme.of(context).primaryColor,
-      //   onPressed: (){
-      //     Navigator.push(context, MaterialPageRoute(builder: (ctx) => AddWorkout()));
-      //   },
-      // ),
     );
   }
 }
