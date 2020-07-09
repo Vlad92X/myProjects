@@ -1,9 +1,8 @@
 import 'package:apl_weather_vlad/core/constants.dart';
 
-import 'package:apl_weather_vlad/screens/usersettings.dart';
 import 'package:apl_weather_vlad/screens/weather-clock.dart';
 import 'package:apl_weather_vlad/screens/weather-day.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,10 +32,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         actions: <Widget>[
           FlatButton.icon(
-              onPressed: () {
-                //переход в настройки пользователя
-                UserSettings().settings();
-              },
+              onPressed: () {},
               icon: Icon(
                 Icons.supervised_user_circle,
                 color: Colors.white,

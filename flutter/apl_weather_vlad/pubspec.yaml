@@ -33,6 +33,7 @@ dependencies:
   provider: ^4.1.3
   fluttertoast: ^4.0.1
   curved_navigation_bar: ^0.3.3
+  path_provider: ^1.6.11
  
 
 dev_dependencies:

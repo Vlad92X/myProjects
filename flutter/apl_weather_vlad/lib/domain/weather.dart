@@ -1,8 +1,14 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+// import 'package:http/http.dart' as http;
+// import 'dart:convert';
+
+import 'dart:async';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 
 class Weather {
-  String dt; //": 1594209600,
+  String dtKey; //": 1594209600,
   MainDataWeather mainDataTemp;
   /*"main": { "temp": 296.92,
                                             "feels_like": 296.12,
@@ -16,6 +22,7 @@ class Weather {
   Wind wind; //  "wind": {speed, degree}
   double rain = 0; //": {"3h": 2.56 },
   DateTime dtTxt; //": "2020-07-08 12:00:00"
+  DateTime get dateTime => dtTxt;
   String get printDay {
     String weekDay;
     switch (dtTxt.weekday) {
@@ -53,7 +60,7 @@ class Weather {
           : dtTxt.minute.toString());
 
   Weather(
-      {this.dt,
+      {this.dtKey,
       this.mainDataTemp,
       this.id,
       this.mainWeather,
@@ -62,6 +69,34 @@ class Weather {
       this.wind,
       this.rain,
       this.dtTxt});
+
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
+  }
+
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/weather.txt');
+  }
+
+  Future<Weather> readWeather() async {
+    try {
+      final file = await _localFile;
+      String contents = await file.readAsString();
+
+      return Weather.parse(contents);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<File> writeCounter(int counter) async {
+    final file = await _localFile;
+    return file.writeAsString('$counter');
+  }
+
+  static Future<Weather> parse(String contents) {}
 }
 
 class MainDataWeather {
@@ -91,14 +126,18 @@ class URLcomponents {
   String get urlComponents => type + "=" + city + "&" + typeCode + "=" + key;
 }
 
-loadDataWeather(URLcomponents data) async {
-  final response = await http.get(
-      'https://api.openweathermap.org/data/2.5/forecast?' + data.urlComponents);
-  if (response.statusCode == 200) {
-    // print(response.body);
-    var allData =
-        (json.decode(response.body) as Map)['main'] as Map<String, dynamic>;
-    var weatherDataList = List<Weather>();
-    allData.forEach((key, value) {});
-  }
-}
+// loadDataWeather(URLcomponents data) async {
+//   final response = await http.get(
+//       'https://api.openweathermap.org/data/2.5/forecast?' + data.urlComponents);
+//   if (response.statusCode == 200) {
+//     // print(response.body);
+//     var allData =
+//         (json.decode(response.body) as Map)['main'] as Map<String, dynamic>;
+//     var weatherDataList = List<Weather>();
+//     allData.forEach((key, value) {});
+//   }
+// }
+
+class ForecastForDay extends Weather {}
+
+class ForecastForClock extends Weather {}
