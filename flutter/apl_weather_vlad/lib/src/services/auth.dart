@@ -1,5 +1,4 @@
-import 'package:apl_weather_vlad/domain/user.dart';
-
+import 'package:apl_weather_vlad/src/domain/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {

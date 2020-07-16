@@ -1,5 +1,5 @@
-import 'package:apl_weather_vlad/domain/user.dart';
-import 'package:apl_weather_vlad/domain/weather.dart';
+import 'package:apl_weather_vlad/src/domain/user.dart';
+import 'package:apl_weather_vlad/src/model/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,16 +17,6 @@ class _WeatherListState extends State<WeatherList> {
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   if (workoutsStreamSubscription != null) {
-  //     workoutsStreamSubscription.cancel();
-  //   }
-  //   super.dispose();
-  // }
-
-  // var db = DatabaseService();
-  // StreamSubscription<List<Workout>> workoutsStreamSubscription;
   var weather = List<Weather>();
 
   var filterHeight = 0.0;
@@ -70,106 +60,12 @@ class _WeatherListState extends State<WeatherList> {
   Widget build(BuildContext context) {
     user = Provider.of<User>(context);
 
-    // var filterInfo = Container(
-    //   margin: EdgeInsets.only(top: 3, left: 7, right: 7, bottom: 5),
-    //   decoration: BoxDecoration(color: Colors.white.withOpacity(0.5)),
-    //   height: 40,
-    //   child: RaisedButton(
-    //     child: Row(
-    //       children: <Widget>[
-    //         Icon(Icons.filter_list),
-    //         Text(
-    //           filterText,
-    //           style: TextStyle(),
-    //           overflow: TextOverflow.ellipsis,
-    //         ),
-    //       ],
-    //     ),
-    //     onPressed: () {
-    //       setState(() {
-    //         filterHeight = (filterHeight == 0.0 ? 220.0 : 0.0);
-    //       });
-    //     },
-    //   ),
-    // );
-    // var levelMenuItems = <String>[
-    //   'Any Level',
-    //   'Beginner',
-    //   'Intermediate',
-    //   'Advanced'
-    // ].map((String value) {
-    //return new DropdownMenuItem<String>(
-    //   value: value,
-    //    child: new Text(value),
-    //   );
-    // }).toList();
-    //  var filterForm = AnimatedContainer(
-    //   margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 7),
-    //   child: Card(
-    //     child: Padding(
-    //       padding: const EdgeInsets.all(8.0),
-    //       child: Column(
-    //         children: [
-    //           SwitchListTile(
-    //               title: const Text('Only My Workouts'),
-    //               value: filterOnlyMyWorkouts,
-    //               onChanged: (bool val) =>
-    //                   setState(() => filterOnlyMyWorkouts = val)),
-    //           DropdownButtonFormField<String>(
-    //             decoration: const InputDecoration(labelText: 'Level'),
-    //             items: levelMenuItems,
-    //             value: filterLevel,
-    //             onChanged: (String val) => setState(() => filterLevel = val),
-    //           ),
-    //           TextFormField(
-    //             controller: filterTitleController,
-    //             decoration: const InputDecoration(labelText: 'Title'),
-    //             onChanged: (String val) => setState(() => filterTitle = val),
-    //           ),
-    //           Row(
-    //             children: <Widget>[
-    //               Expanded(
-    //                 flex: 1,
-    //                 child: RaisedButton(
-    //                   onPressed: () {
-    //                     filter();
-    //                   },
-    //                   child:
-    //                       Text("Apply", style: TextStyle(color: Colors.white)),
-    //                   color: Theme.of(context).primaryColor,
-    //                 ),
-    //               ),
-    //               SizedBox(width: 10),
-    //               Expanded(
-    //                 flex: 1,
-    //                 child: RaisedButton(
-    //                   onPressed: () {
-    //                     filter(clear: true);
-    //                   },
-    //                   child:
-    //                       Text("Clear", style: TextStyle(color: Colors.white)),
-    //                   color: Colors.red,
-    //                 ),
-    //               )
-    //             ],
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   ),
-    //   duration: const Duration(milliseconds: 400),
-    //   curve: Curves.fastOutSlowIn,
-    //   height: filterHeight,
-    // );
     var widgetsList = Expanded(
       child: ListView.builder(
           itemCount: weather.length,
           itemBuilder: (context, i) {
             return InkWell(
-              onTap: () {
-                // Navigator.of(context).push(MaterialPageRoute(
-                //     builder: (ctx) => WorkoutDetails(id: weather[i].id)));
-              },
+              onTap: () {},
               child: Card(
                 key: Key(weather[i].id),
                 elevation: 2.0,

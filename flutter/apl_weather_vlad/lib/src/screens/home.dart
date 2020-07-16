@@ -1,7 +1,10 @@
-import 'package:apl_weather_vlad/core/constants.dart';
+import 'package:apl_weather_vlad/src/screens/weather-clock.dart';
+import 'package:apl_weather_vlad/src/screens/weather-day.dart';
+import 'package:apl_weather_vlad/src/utils/constants.dart';
+import 'package:apl_weather_vlad/src/model/weather.dart';
 
-import 'package:apl_weather_vlad/screens/weather-clock.dart';
-import 'package:apl_weather_vlad/screens/weather-day.dart';
+import 'package:apl_weather_vlad/src/services/dataWeather.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
 
@@ -16,10 +19,16 @@ class _HomePageState extends State<HomePage> {
   int sectionIndex = 0;
   var navigateHeight = 0.0;
   var filterText = '';
+  var url = URLcomponents(city: 'Kharkiv');
+
+  // var listWeather = List<Weather>();
+  List<Weather> listWeather = [];
 
   @override
   Widget build(BuildContext context) {
     setState(() {
+      //listWeather = futureData;
+
       if (sectionIndex == 0) {
         sectionIndex = 1;
       } else {
@@ -70,7 +79,40 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
-      body: sectionIndex == 0 ? WeatherByTheDays() : WeatherByTheClock(),
+      body: sectionIndex == 0
+          ? WeatherByTheDays(listWeather: listWeather)
+          : WeatherByTheClock(),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: ColorTool().bgColorActive,
+          child: Icon(Icons.refresh),
+          onPressed: () => loadDataWeather(url)),
     );
+  }
+
+  List<Widget> _buildList() {
+    return listWeather
+        .map((Weather w) => ListTile(
+              title: Text(w.mainWeather),
+              leading: Text(
+                w.printDay,
+                style: TextStyle(
+                  fontSize: 22,
+                ),
+              ),
+              subtitle: Text('temp: ${w.temp.toString()}f'),
+              trailing: Column(children: <Widget>[
+                Icon(
+                  w.getIconData(),
+                  color: Colors.black,
+                  size: 18,
+                ),
+                Text(w.description),
+              ]),
+              // onTap: () {
+              //   Navigator.push(context,
+              //       MaterialPageRoute(builder: (ctx) => WeatherFullScreen()));
+              // },
+            ))
+        .toList();
   }
 }
