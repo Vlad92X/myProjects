@@ -88,31 +88,4 @@ class _HomePageState extends State<HomePage> {
           onPressed: () => loadDataWeather(url)),
     );
   }
-
-  List<Widget> _buildList() {
-    return listWeather
-        .map((Weather w) => ListTile(
-              title: Text(w.mainWeather),
-              leading: Text(
-                w.printDay,
-                style: TextStyle(
-                  fontSize: 22,
-                ),
-              ),
-              subtitle: Text('temp: ${w.temp.toString()}f'),
-              trailing: Column(children: <Widget>[
-                Icon(
-                  w.getIconData(),
-                  color: Colors.black,
-                  size: 18,
-                ),
-                Text(w.description),
-              ]),
-              // onTap: () {
-              //   Navigator.push(context,
-              //       MaterialPageRoute(builder: (ctx) => WeatherFullScreen()));
-              // },
-            ))
-        .toList();
-  }
 }

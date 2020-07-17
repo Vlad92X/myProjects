@@ -5,7 +5,9 @@ import 'package:apl_weather_vlad/src/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(WeatherApp());
+void main() {
+  runApp(WeatherApp());
+}
 
 class WeatherApp extends StatelessWidget {
   @override
