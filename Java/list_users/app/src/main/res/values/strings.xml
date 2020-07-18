@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">ListUsers</string>
+    <string name="app_name">List Users</string>
+    <string name="location">Location</string>
 </resources>
