@@ -22,7 +22,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     public static final String EXTRA_USER =
-            "com.guendouz.people.view.activity.ProfileActivity.EXTRA_USER";
+            "com.example.listusers.view.activity.ProfileActivity.EXTRA_USER";
 
     ProfileActivityBinding mProfileActivityBinding;
     User mUser;

@@ -2,7 +2,7 @@ package com.example.listusers.view.adapter;
 
 
 import android.content.Context;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -65,6 +65,7 @@ public class PeopleListAdapter extends RecyclerView.Adapter<PeopleListAdapter.Bi
 
             mViewDataBinding = viewDataBinding;
             mViewDataBinding.executePendingBindings();
+            Log.d("MyLog", "BindingViewHolder");
         }
 
         public ViewDataBinding getViewDataBinding() {

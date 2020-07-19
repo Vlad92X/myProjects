@@ -1,9 +1,7 @@
 package com.example.listusers.view.fragment;
 
 
-import android.app.Fragment;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +27,9 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-
+/**
+ * This fragment contains a RecyclerView to show the list of users
+ */
 public class PeopleFragment extends Fragment {
 
     PeopleFragmentBinding mPeopleFragmentBinding;
@@ -65,7 +65,6 @@ public class PeopleFragment extends Fragment {
                         Log.e("People", e.getMessage());
                     }
 
-                    @RequiresApi(api = Build.VERSION_CODES.M)
                     @Override
                     public void onNext(RandomUserResponse response) {
                         mPeopleFragmentBinding.rvPeopleList.setLayoutManager(setLayoutManager());
@@ -76,7 +75,6 @@ public class PeopleFragment extends Fragment {
                 });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     private RecyclerView.LayoutManager setLayoutManager() {
         RecyclerView.LayoutManager layoutManager;
         if (!mIsTabletLayout) {
