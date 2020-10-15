@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Dovlatov Finance</string>
+    <string name="empty_text"></string>
+    <string name="btn_calculate">Calculate</string>
+    <string name="head_text">Управление финансами. Распределение Давлатова С.Р</string>
+    <string name="text_fragment">HHHHHHHHHHHHHHHH HHHHHHHHHHHH HHHHHHHHHH </string>
+    <string name="hello_second_activity">hello_second_activity</string>
+</resources>
