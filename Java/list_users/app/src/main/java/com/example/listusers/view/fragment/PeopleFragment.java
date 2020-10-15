@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -23,9 +22,15 @@ import com.example.listusers.databinding.PeopleFragmentBinding;
 import com.example.listusers.view.adapter.PeopleListAdapter;
 import com.example.listusers.view.widget.DividerItemDecoration;
 
+import org.jetbrains.annotations.Nullable;
+
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+
+
+
 
 /**
  * This fragment contains a RecyclerView to show the list of users
@@ -43,6 +48,7 @@ public class PeopleFragment extends Fragment {
 
         mPeopleFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.people_fragment, container, false);
         mIsTabletLayout = false;
+        Log.d("MyLog", "1iter=  : ");
         return mPeopleFragmentBinding.getRoot();
     }
 
@@ -51,18 +57,21 @@ public class PeopleFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final RandomUserAPI randomUserAPI = RandomUserAPI.Factory.create();
-        randomUserAPI.getRandomUsers(20)
+
+        Log.d("MyLog", "1iter=  : "+randomUserAPI.toString());
+        randomUserAPI.getRandomUsers(5)//result - user
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<RandomUserResponse>() {
                     @Override
                     public void onCompleted() {
-
+                        Log.d("MyLog", "onCompleted()");
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Log.e("People", e.getMessage());
+                        Log.d("MyLog", e.getMessage());
                     }
 
                     @Override
@@ -71,6 +80,7 @@ public class PeopleFragment extends Fragment {
                         mPeopleFragmentBinding.rvPeopleList.setHasFixedSize(true);
                         mPeopleListAdapter = new PeopleListAdapter(getContext(), response.getResults());
                         mPeopleFragmentBinding.rvPeopleList.setAdapter(mPeopleListAdapter);
+                        Log.d("MyLog","!!!!!!!!!!!!!!");
                     }
                 });
     }

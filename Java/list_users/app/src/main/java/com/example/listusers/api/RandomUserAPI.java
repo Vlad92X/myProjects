@@ -16,9 +16,8 @@ public interface RandomUserAPI {
      * @param results the number of results (users) to generate
      * @return An Observable object that contains the response
      */
-    @GET("api/?")
+    @GET("api/")
     Observable<RandomUserResponse> getRandomUsers(@Query("results") Integer results);
-//    Observable<RandomUserResponse> getRandomUsers(@Query("") Integer results);
 
     class Factory {
         public static RandomUserAPI create() {

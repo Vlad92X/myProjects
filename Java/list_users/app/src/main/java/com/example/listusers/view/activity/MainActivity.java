@@ -36,13 +36,13 @@ public class MainActivity extends AppCompatActivity {
         if (mMainActivityBinding.toolbar != null) {
             setSupportActionBar(mMainActivityBinding.toolbar);
             mMainActivityBinding.toolbar.setTitle("People");
-            // Log.d("MyLog"," mMainActivityBinding.toolbar.setTitle(\"People\");");
+
 
         }
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_content, new PeopleFragment())
                 .commit();
-        Log.d("MyLog", "  getSupportFragmentManager().beginTransaction()");
+
     }
 }

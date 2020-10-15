@@ -1,12 +1,14 @@
 package com.example.listusers.api;
 
+
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-
 
 public class ServiceFactory {
 
@@ -17,14 +19,18 @@ public class ServiceFactory {
                 .setLenient()
                 .create();
 
+        Log.d("MyLog", "Retrofit:    "+new Retrofit.Builder().baseUrl(endPoint).build().toString());
         final Retrofit restAdapter = new Retrofit.Builder()
                 .baseUrl(endPoint)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         T service = restAdapter.create(clazz);
-
+        Log.d("MyLog", "FFFFF  : "+restAdapter.create(clazz).toString());
         return service;
     }
+
+
+
 
 }
